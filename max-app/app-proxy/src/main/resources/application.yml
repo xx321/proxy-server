@@ -1,0 +1,9 @@
+
+server:
+  port: 7070
+  
+proxyside: 
+  serverUrls: http://app-server-formal:7077,http://app-server-test:7078
+  mainUrl: http://app-server-formal:7077
+  socketUrls: ws://app-server-formal:7077/,ws://app-server-test:7078/
+  mainSocket: ws://app-server-formal:7077/

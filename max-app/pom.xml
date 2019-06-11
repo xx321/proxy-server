@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.19.RELEASE</version>
+		<relativePath/>
+	</parent>
+
+	<groupId>com.max</groupId>
+	<artifactId>max-app</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+  
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+  </dependencies>
+
+  <dependencyManagement>
+  	<dependencies>
+		<dependency>
+			<groupId>com.max</groupId>
+			<artifactId>app-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.maxy</groupId>
+			<artifactId>app-proxy</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.max</groupId>
+			<artifactId>app-server</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+  	</dependencies>
+  
+  </dependencyManagement>
+  <build>
+      <pluginManagement>
+          <plugins>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <configuration>
+                      <source>1.8</source>
+                      <target>1.8</target>
+                  </configuration>
+              </plugin>
+              <plugin>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-maven-plugin</artifactId>
+              </plugin>
+              
+
+	            <!-- tag::plugin[] -->
+	            <plugin>
+	                <groupId>com.spotify</groupId>
+	                <artifactId>docker-maven-plugin</artifactId>
+	                <version>0.4.12</version>
+	                <configuration>
+	                    <imageName>max/${project.artifactId}:0.0.1</imageName>
+	                    <dockerDirectory>${project.basedir}</dockerDirectory>
+	                    <resources>
+	                        <resource>
+	                            <targetPath>/</targetPath>
+	                            <directory>${project.build.directory}</directory>
+	                            <include>${project.build.finalName}.jar</include>
+	                        </resource>
+	                    </resources>
+	                </configuration>
+	            </plugin>
+	            <!-- end::plugin[] -->
+              
+          </plugins>
+      </pluginManagement>
+  </build>
+  
+  <modules>
+    <module>app-api</module>
+    <module>app-proxy</module>
+    <module>app-server</module>
+  </modules>
+  
+</project>

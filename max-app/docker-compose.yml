@@ -1,0 +1,28 @@
+version: '3'
+services: 
+  app-proxy: 
+    build: 
+      context: ./
+      dockerfile: ./app-proxy/Dockerfile
+    restart: always
+    container_name: app-proxy
+    ports:
+      - 7070:7070
+
+  app-server-formal: 
+    build: 
+      context: ./
+      dockerfile: ./app-server/Dockerfile-Formal
+    restart: always
+    container_name: app-server-formal
+    ports:
+      - 7077:7077
+
+  app-server-test: 
+    build: 
+      context: ./
+      dockerfile: ./app-server/Dockerfile-Test
+    restart: always
+    container_name: app-server-test
+    ports:
+      - 7078:7078

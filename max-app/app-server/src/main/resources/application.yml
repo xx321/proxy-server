@@ -1,0 +1,6 @@
+
+server:
+  port: 7077
+  
+serverside: 
+  serverName: app-server
